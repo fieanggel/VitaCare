@@ -70,9 +70,13 @@ export default function DoctorAppointmentsPage() {
     const fetchAppointments = async () => {
       try {
         setIsLoading(true);
-        const response = await fetch("/api/appointments?role=doctor");
+        const response = await fetch("/api/appointments?role=doctor", {
+          credentials: "include",
+        });
 
         if (!response.ok) {
+          const errorBody = await response.text();
+          console.error("Doctor appointments API error:", response.status, response.statusText, errorBody);
           throw new Error("Failed to fetch appointments");
         }
 

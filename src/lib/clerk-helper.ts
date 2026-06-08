@@ -34,9 +34,9 @@ export async function getAuthFromApiRoute(request: Request) {
 }
 
 // Versi kompatibilitas dari currentUser()
-export async function currentUser() {
+export async function currentUser(options?: { request?: Request }) {
   try {
-    return await clerkCurrentUser();
+    return await clerkCurrentUser(options);
   } catch (e) {
     console.error("Clerk currentUser error:", e);
     return null;

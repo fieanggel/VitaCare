@@ -21,7 +21,7 @@ export default function BookAppointment() {
     const checkPatientProfile = async () => {
       try {
         setIsLoading(true);
-        const response = await fetch("/api/patient/profile");
+        const response = await fetch("/api/patient/profile", { credentials: "include" });
         
         if (response.status === 404) {
           setHasPatientProfile(false);

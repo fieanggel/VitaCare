@@ -4,16 +4,16 @@ import { auth, currentUser } from "@/lib/clerk-helper";
 
 // POST /api/users/sync
 // Manually sync the current user data from Clerk to our database
-export async function POST() {
+export async function POST(request: Request) {
   try {
-    const { userId } = auth();
+    const { userId } = auth({ request });
 
     if (!userId) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
     // Get the current user from Clerk
-    const user = await currentUser();
+    const user = await currentUser({ request });
 
     if (!user) {
       return NextResponse.json({ error: "User not found" }, { status: 404 });

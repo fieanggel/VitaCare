@@ -53,9 +53,9 @@ const patientProfileSchema = z.object({
   emergencyContact: z.string().min(1, "Emergency contact is required").max(500, "Emergency contact too long"),
 });
 
-export async function GET() {
+export async function GET(request: Request) {
   try {
-    const { userId: clerkId } = await auth();
+    const { userId: clerkId } = await auth({ request });
 
     if (!clerkId) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
@@ -105,7 +105,7 @@ export async function GET() {
 
 export async function POST(request: Request) {
   try {
-    const { userId: clerkId } = await auth();
+    const { userId: clerkId } = await auth({ request });
 
     if (!clerkId) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });

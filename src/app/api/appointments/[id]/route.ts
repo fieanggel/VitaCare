@@ -14,7 +14,7 @@ export async function GET(
 ) {
   return withSecurity(
     async () => {
-      const { userId: clerkId } = await auth();
+      const { userId: clerkId } = await auth({ request });
 
       if (!clerkId) {
         return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
@@ -109,7 +109,7 @@ export async function PATCH(
   { params }: { params: { id: string } }
 ) {
   try {
-    const { userId: clerkId } = await auth();
+    const { userId: clerkId } = await auth({ request });
 
     if (!clerkId) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });

@@ -80,10 +80,14 @@ function AppointmentsContent() {
     const fetchAppointments = async () => {
       try {
         setIsLoading(true);
-        const response = await fetch("/api/appointments");
+        const response = await fetch("/api/appointments", {
+          credentials: "include",
+        });
 
         if (!response.ok) {
-          throw new Error("Failed to fetch appointments");
+          const errorBody = await response.text();
+          console.error("Appointments API error response:", response.status, response.statusText, errorBody);
+          throw new Error(`Failed to fetch appointments (${response.status})`);
         }
 
         const data = await response.json();

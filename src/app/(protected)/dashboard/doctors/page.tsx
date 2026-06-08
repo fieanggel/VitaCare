@@ -31,16 +31,19 @@ export default function DoctorDashboard() {
     const fetchAppointments = async () => {
       try {
         setIsLoading(true);
-        const response = await fetch("/api/appointments?role=doctor");
+        const response = await fetch("/api/appointments?role=doctor", {
+          credentials: "include",
+        });
         
         if (!response.ok) {
+          const errorBody = await response.text();
+          console.error("Doctor appointments API error:", response.status, response.statusText, errorBody);
           throw new Error("Failed to fetch appointments");
         }
         
         const data = await response.json();
         
         // Filter pending appointments
-        const pending = data.filter((app: Appointment) => app.status === "PENDING");
         setPendingAppointments(pending);
         
         // Filter today's appointments

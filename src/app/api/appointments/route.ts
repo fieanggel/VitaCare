@@ -40,10 +40,13 @@ const appointmentSchema = z.object({
 
 export async function POST(request: NextRequest) {
   try {
-    const { userId: clerkId } = await auth();
+    const { userId: clerkId } = await auth({ request });
 
     if (!clerkId) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });    } // Get user from database with patient information
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
+    // Get user from database with patient information
     const user = await prisma.user.findUnique({
       where: { clerkId },
       include: {
@@ -255,7 +258,7 @@ export async function POST(request: NextRequest) {
 
 export async function GET(request: NextRequest) {
   try {
-    const { userId: clerkId } = await auth();
+    const { userId: clerkId } = await auth({ request });
 
     if (!clerkId) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });

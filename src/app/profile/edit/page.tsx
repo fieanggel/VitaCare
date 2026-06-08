@@ -96,7 +96,7 @@ export default function EditPatientProfile() {
     const fetchProfile = async () => {
       try {
         setIsLoading(true);
-        const response = await fetch("/api/patient/profile");
+        const response = await fetch("/api/patient/profile", { credentials: "include" });
 
         if (response.ok) {
           const data = await response.json();
@@ -144,6 +144,7 @@ export default function EditPatientProfile() {
         headers: {
           "Content-Type": "application/json",
         },
+        credentials: "include",
         body: JSON.stringify(values),
       });      if (!response.ok) {
         const errorData: ApiErrorResponse = await response.json();
