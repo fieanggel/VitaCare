@@ -1,11 +1,11 @@
 import { NextResponse } from "next/server";
-import { getAuthFromApiRoute } from "@/lib/clerk-helper";
+import { auth } from "@clerk/nextjs/server";
 
 export const dynamic = "force-dynamic";
 
 export async function GET(request: Request) {
   try {
-    const { userId } = await getAuthFromApiRoute(request);
+    const { userId } = await auth();
 
     // Check if user is authenticated
     if (!userId) {

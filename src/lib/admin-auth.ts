@@ -1,4 +1,4 @@
-import { auth } from "@/lib/clerk-helper";
+import { auth } from "@clerk/nextjs/server";
 import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
 
@@ -8,10 +8,7 @@ import { NextResponse } from "next/server";
  */
 export async function requireAdmin() {
   try {
-    const authResult = auth();
-    const { userId: clerkId } = typeof authResult === 'object' && 'userId' in authResult 
-      ? authResult 
-      : await authResult;
+    const { userId: clerkId } = await auth();
 
     if (!clerkId) {
       return NextResponse.json(

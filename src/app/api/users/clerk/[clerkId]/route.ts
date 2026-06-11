@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
-import { auth } from "@/lib/clerk-helper";
+import { auth } from "@clerk/nextjs/server";
 
 // GET /api/users/clerk/[clerkId] - Get user by clerkId
 export async function GET(
@@ -9,7 +9,7 @@ export async function GET(
 ) {
   try {
     // Check authentication
-    const { userId } = auth({ request: req });
+    const { userId } = await auth();
 
     if (!userId) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });

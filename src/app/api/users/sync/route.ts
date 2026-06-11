@@ -1,19 +1,19 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
-import { auth, currentUser } from "@/lib/clerk-helper";
+import { auth, currentUser } from "@clerk/nextjs/server";
 
 // POST /api/users/sync
 // Manually sync the current user data from Clerk to our database
 export async function POST(request: Request) {
   try {
-    const { userId } = auth({ request });
+    const { userId } = await auth();
 
     if (!userId) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
     // Get the current user from Clerk
-    const user = await currentUser({ request });
+    const user = await currentUser();
 
     if (!user) {
       return NextResponse.json({ error: "User not found" }, { status: 404 });

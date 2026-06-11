@@ -55,7 +55,7 @@ const patientProfileSchema = z.object({
 
 export async function GET(request: Request) {
   try {
-    const { userId: clerkId } = await auth({ request });
+    const { userId: clerkId } = await auth();
 
     if (!clerkId) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
@@ -105,7 +105,7 @@ export async function GET(request: Request) {
 
 export async function POST(request: Request) {
   try {
-    const { userId: clerkId } = await auth({ request });
+    const { userId: clerkId } = await auth();
 
     if (!clerkId) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });

@@ -1,13 +1,13 @@
 import { NextResponse } from "next/server";
 import { headers } from "next/headers";
-import { auth } from "@/lib/clerk-helper";
+import { auth } from "@clerk/nextjs/server";
 import { prisma } from "@/lib/prisma";
 
 // GET /api/hono-clerk-test - Test the Clerk integration with Hono
 export async function GET() {
   try {
     // Get authenticated user from Clerk
-    const { userId: clerkId, sessionId } = auth();
+    const { userId: clerkId, sessionId } = await auth();
     const headersList = headers();
 
     const responseData: {

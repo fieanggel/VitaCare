@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { auth } from "@/lib/clerk-helper";
+import { auth } from "@clerk/nextjs/server";
 import { prisma } from "@/lib/prisma";
 
 /**
@@ -9,7 +9,7 @@ import { prisma } from "@/lib/prisma";
 export async function GET() {
   try {
     // Dapatkan info autentikasi Clerk
-    const { userId: clerkId } = auth();
+    const { userId: clerkId } = await auth();
 
     if (!clerkId) {
       return NextResponse.json(

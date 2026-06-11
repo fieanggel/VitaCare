@@ -1,6 +1,6 @@
 import { NextResponse, NextRequest } from "next/server";
 import { prisma } from "@/lib/prisma";
-import { getAuthFromApiRoute } from "@/lib/clerk-helper";
+import { auth } from "@clerk/nextjs/server";
 import { withSecurity } from "@/lib/security-middleware";
 
 export const dynamic = "force-dynamic";
@@ -13,7 +13,7 @@ export async function GET(request: NextRequest) {
   return withSecurity(
     async (req: NextRequest) => {
       // Get current user from auth
-      const { userId: clerkId } = await getAuthFromApiRoute(req);
+      const { userId: clerkId } = await auth();
 
       if (!clerkId) {
         return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
