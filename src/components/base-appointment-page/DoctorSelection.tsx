@@ -211,7 +211,7 @@ export default function DoctorSelection({
                 ) : (
                   <div className="h-32 w-32 rounded-full bg-indigo-200 flex items-center justify-center border-4 border-white">
                     <span className="text-4xl font-bold text-indigo-600">
-                      {doctor?.user?.name.charAt(0)}
+                      {(doctor?.user?.name || "Doctor").charAt(0)}
                     </span>
                   </div>
                 )}
@@ -219,8 +219,8 @@ export default function DoctorSelection({
 
               <div className="p-4">
                 <h3 className="font-bold text-lg text-gray-900">
-                  {!doctor?.user?.name.includes("Dr.") && "Dr."}{" "}
-                  {doctor?.user?.name}
+                  {!doctor?.user?.name?.includes("Dr.") && "Dr."}{" "}
+                  {doctor?.user?.name || "Unknown Doctor"}
                 </h3>
                 <p className="text-indigo-600 font-medium">
                   {doctor.specialization}

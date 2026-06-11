@@ -61,6 +61,7 @@ export async function GET(request: NextRequest) {
             select: {
               id: boolean;
               name: boolean;
+              profilePic: boolean;
             };
           };
           specialties?: {
@@ -83,6 +84,7 @@ export async function GET(request: NextRequest) {
             select: {
               id: true,
               name: true,
+              profilePic: true,
               // Don't expose email or sensitive user data
             }
           };
