@@ -67,7 +67,7 @@ export default function AppointmentConfirmation({
         startTime: `${date}T${startTime}:00`,
         endTime: `${date}T${endTime}:00`,
         reason,
-        notes: notes.trim() || null,
+        notes: notes.trim() || undefined,
         type: appointmentType,
       };
 

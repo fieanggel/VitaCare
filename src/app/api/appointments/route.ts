@@ -35,7 +35,7 @@ const appointmentSchema = z.object({
   }),
   reason: z.string().min(1, "Reason is required").max(500, "Reason too long"),
   type: z.enum(["IN_PERSON", "VIDEO_CALL", "PHONE_CALL"]).optional(),
-  notes: z.string().max(1000, "Notes too long").optional(),
+  notes: z.string().max(1000, "Notes too long").optional().nullable(),
 });
 
 export async function POST(request: NextRequest) {
