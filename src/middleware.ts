@@ -5,6 +5,7 @@ import { NextResponse } from "next/server";
 const isDashboardRoute = createRouteMatcher(["/dashboard(.*)"]);
 const isAdminRoute = createRouteMatcher(["/dashboard/admin(.*)"]);
 const isDoctorRoute = createRouteMatcher(["/dashboard/doctors(.*)"]);
+const isWebhookRoute = createRouteMatcher(["/api/webhooks(.*)"]);
 
 // Cache untuk menyimpan role user (mengurangi API calls)
 const roleCache = new Map<string, { role: string; timestamp: number }>();
@@ -18,15 +19,31 @@ export default clerkMiddleware(async (auth, req) => {
   // Sekarang kita bisa mengakses userId dari hasil await
   const userId = authData.userId;
   // Route yang sedang diakses
-  const pathname = req.nextUrl.pathname; // Skip role check for API routes, static files, and auth pages
+  const pathname = req.nextUrl.pathname;
+
+  // Skip role check for static files and auth pages (these don't need Clerk auth context)
   if (
-    pathname.startsWith("/api/") ||
     pathname.startsWith("/_next/") ||
     pathname.startsWith("/sign-in") ||
     pathname.startsWith("/sign-up") ||
     pathname.startsWith("/sign-out") ||
     pathname === "/favicon.ico"
   ) {
+    return NextResponse.next();
+  }
+
+  // For API routes: do not skip auth handling. Return 401 for unauthenticated
+  // requests, while still allowing non-session webhook endpoints to pass through.
+  if (pathname.startsWith("/api/")) {
+    if (isWebhookRoute(req)) {
+      return NextResponse.next();
+    }
+
+    if (!userId) {
+      console.log("[Middleware] Unauthenticated API request:", pathname);
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
     return NextResponse.next();
   }
   // Untuk pengguna yang belum login
