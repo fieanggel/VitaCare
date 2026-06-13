@@ -24,15 +24,17 @@ const HeroSection: React.FC = () => {
             life.
           </p>{" "}
           <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-            <Link href="/appointments/book">
-              <button className="bg-primary hover:opacity-90 text-primary-foreground px-8 py-3 rounded-full font-medium transition duration-300">
-                Book Appointment
-              </button>
+            <Link 
+              href="/appointments/book"
+              className="bg-primary hover:opacity-90 text-primary-foreground px-8 py-3 rounded-full font-medium transition duration-300 text-center"
+            >
+              Book Appointment
             </Link>
-            <Link href="/dashboard/doctors">
-              <button className="bg-secondary hover:opacity-90 text-secondary-foreground px-8 py-3 rounded-full font-medium transition duration-300">
-                Doctor Portal
-              </button>
+            <Link 
+              href="/dashboard/doctors"
+              className="bg-secondary hover:opacity-90 text-secondary-foreground px-8 py-3 rounded-full font-medium transition duration-300 text-center"
+            >
+              Doctor Portal
             </Link>
           </div>
         </div>
