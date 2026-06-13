@@ -9,7 +9,7 @@ const HeroSection: React.FC = () => {
       className="hero-bg text-white py-20 md:py-64 bg-cover bg-center relative"
       style={{
         backgroundImage:
-          "linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1579684385127-1ef15d508118?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80')",
+          "linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('/hero-bg.jpg')",
       }}
     >
       <div className="container mx-auto px-4">
