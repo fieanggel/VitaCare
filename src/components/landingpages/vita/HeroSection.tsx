@@ -14,26 +14,24 @@ const HeroSection: React.FC = () => {
     >
       <div className="container mx-auto px-4">
         <div className="max-w-2xl">
-          <Link href="/appointments/book">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">
-              appointments/book (Debug){" "}
-              <span className="text-secondary">Top Priority</span>
-            </h1>
-          </Link>
+          <h1 className="text-4xl md:text-5xl font-bold mb-6">
+            Your Health is Our{" "}
+            <span className="text-secondary">Top Priority</span>
+          </h1>
           <p className="text-lg mb-8">
             We provide exceptional healthcare services with compassion and
             cutting-edge technology to ensure your well-being at every stage of
             life.
           </p>{" "}
           <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-            <Link href="/dashboard/admin">
-              <button className="bg-primary hover:bg-green-700 text-white px-8 py-3 rounded-full font-medium transition duration-300">
-                Admin Area (Debug)
+            <Link href="/appointments/book">
+              <button className="bg-primary hover:opacity-90 text-primary-foreground px-8 py-3 rounded-full font-medium transition duration-300">
+                Book Appointment
               </button>
             </Link>
             <Link href="/dashboard/doctors">
-              <button className="bg-secondary hover:bg-yellow-600 text-gray-800 px-8 py-3 rounded-full font-medium transition duration-300">
-                Doctor Area (Debug)
+              <button className="bg-secondary hover:opacity-90 text-secondary-foreground px-8 py-3 rounded-full font-medium transition duration-300">
+                Doctor Portal
               </button>
             </Link>
           </div>
