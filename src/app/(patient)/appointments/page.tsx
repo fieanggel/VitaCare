@@ -287,9 +287,7 @@ function AppointmentsContent() {
                       Cancel Appointment
                     </button>
                   )}
-                  <button className="text-indigo-600 hover:text-indigo-800 text-sm font-medium">
-                    View Details
-                  </button>
+
                 </div>
               </div>
             </div>
